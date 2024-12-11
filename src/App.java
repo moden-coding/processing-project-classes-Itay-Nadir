@@ -3,7 +3,6 @@ import processing.core.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.*;
 
 public class App extends PApplet {
@@ -11,7 +10,7 @@ public class App extends PApplet {
     boolean clicked;
     float x;
     float y;
-    Scanner reader;
+    // int hieght;
     ArrayList<Wall> walls = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -19,13 +18,24 @@ public class App extends PApplet {
     }
 
     public void setup() {
+      
         // wall1 = new Wall(30, 50, 50, 5, this);
         // wall2 = new Wall(20, 10, 60, 5, this);
         // walls.add(wall1);
         // walls.add(wall2);
 
-        reader = new Scanner(System.in);
-    }
+        // width = 5;
+        // if(width < hieght){
+        //     width = 5;
+        // }
+        // else if (width > hieght){
+        //     width = hieght;
+        // }
+
+        loadFile();
+        
+       
+        }
 
     public void settings() {
         size(800, 600);
@@ -37,7 +47,17 @@ public class App extends PApplet {
         for (Wall w : walls) {
             w.display();
         }
-        rect(min(x1, x2), min(y1, y2), abs(x1 - x2), abs(y1 - y2));
+        float wallWidth = abs(x1 - x2);
+        float wallHeight = abs(y1 - y2);
+
+        if(wallWidth < wallHeight){
+            wallWidth = 5;
+        }
+
+        if(wallHeight < wallWidth){
+            wallHeight = 5;
+        }
+        rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
     }
 
@@ -45,17 +65,14 @@ public class App extends PApplet {
         if (key == 's') {
             saveFile();
         }
-        if (key == 'l'){
+        // setup();
+        // String input = reader.nextLine();
+        // String[] parts = input.split(",");
+        // Wall wall = new Wall(x, y, Integer.valueOf(parts[0]),
+        // Integer.valueOf(parts[1]), this);
+        // // Wall wall = new Wall( 100, 5, this);
+        // walls.add(wall);
 
-        }
-            // setup();
-            // String input = reader.nextLine();
-            // String[] parts = input.split(",");
-            // Wall wall = new Wall(x, y, Integer.valueOf(parts[0]),
-            // Integer.valueOf(parts[1]), this);
-            // // Wall wall = new Wall( 100, 5, this);
-            // walls.add(wall);
-    
     }
 
     public void saveFile() {
@@ -63,7 +80,7 @@ public class App extends PApplet {
 
         try (PrintWriter writer = new PrintWriter(filePath)) {
 
-            for(Wall w : walls) {
+            for (Wall w : walls) {
                 writer.println(w.saveInfo());
             }
             writer.close(); // Closes the writer and saves the file
@@ -73,20 +90,20 @@ public class App extends PApplet {
             e.printStackTrace();
         }
     }
-    public void loadFile(){
-    walls.clear();
-    String filePath = "saveWall.txt"; // Path to the text file
 
-        try (PrintWriter writer = new PrintWriter(filePath)) {
-            while(reader.hasNextLine()){
-                String row = reader.nextLine();
-                Wall temp = new Wall(row,this);
+    public void loadFile() {
+        String filePath = "saveWall.txt"; // Path to the text file
+
+        try (Scanner scanner = new Scanner(Paths.get(filePath))){
+            while (scanner.hasNextLine()) {
+                String row = scanner.nextLine();
+                Wall temp = new Wall(row, this);
                 walls.add(temp);
             }
-            
-            } catch (Exception e) {
+
+        } catch (Exception e) {
             System.out.println("An error occurred while writing to the file.");
-          
+
         }
     }
 
