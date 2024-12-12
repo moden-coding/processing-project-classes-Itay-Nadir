@@ -51,11 +51,11 @@ public class App extends PApplet {
         float wallHeight = abs(y1 - y2);
 
         if(wallWidth < wallHeight){
-            wallWidth = 5;
+            wallWidth = 20;
         }
 
         if(wallHeight < wallWidth){
-            wallHeight = 5;
+            wallHeight = 20;
         }
         rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
@@ -130,7 +130,17 @@ public class App extends PApplet {
     }
 
     public void mouseReleased() {
-        Wall w = new Wall(min(x1, x2), min(y1, y2), abs(x1 - x2), abs(y1 - y2), this);
+        float wallWidth = abs(x1 - x2);
+        float wallHeight = abs(y1 - y2);
+
+        if(wallWidth < wallHeight){
+            wallWidth = 20;
+        }
+
+        if(wallHeight < wallWidth){
+            wallHeight = 20;
+        }
+        Wall w = new Wall(min(x1, x2), min(y1, y2), wallWidth, wallHeight, this);
         walls.add(w);
 
     }

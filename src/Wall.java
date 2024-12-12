@@ -9,7 +9,7 @@ public class Wall {
     private PApplet canvas;
     private int color;
 
-    public Wall(float xPos, float yPos, float h, float w, PApplet draw) {
+    public Wall(float xPos, float yPos, float w, float h, PApplet draw) {
         this.x = xPos;
         this.y = yPos;
         canvas = draw;
@@ -22,7 +22,8 @@ public class Wall {
         String[] parts = line.split(",");
         this.x = Float.valueOf(parts[0]);
         this.y = Float.valueOf(parts[1]);
-        this.height = Float.valueOf(parts[2]);
+        this.width = Float.valueOf(parts[2]);
+        this.height = Float.valueOf(parts[3]);
 
         canvas = draw;
     }
