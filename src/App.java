@@ -10,6 +10,9 @@ public class App extends PApplet {
     boolean clicked;
     float x;
     float y;
+    float ballX, ballY;
+    int ballSize = 20;
+    int ballSpeed = 1;
     // int hieght;
     ArrayList<Wall> walls = new ArrayList<>();
 
@@ -18,6 +21,8 @@ public class App extends PApplet {
     }
 
     public void setup() {
+        ballX = 775;
+        ballY = 100;
       
         // wall1 = new Wall(30, 50, 50, 5, this);
         // wall2 = new Wall(20, 10, 60, 5, this);
@@ -59,12 +64,17 @@ public class App extends PApplet {
         }
         rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
+        fill(255, 0, 0);
+            ellipse(ballX, ballY, ballSize, ballSize);
+
     }
 
     public void keyPressed() {
         if (key == 's') {
             saveFile();
         }
+        
+
         // setup();
         // String input = reader.nextLine();
         // String[] parts = input.split(",");
