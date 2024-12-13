@@ -8,12 +8,9 @@ import java.util.*;
 public class App extends PApplet {
     float x1, y1, x2, y2;
     boolean clicked;
-    float x;
-    float y;
     float ballX, ballY;
     int ballSize = 20;
-    int ballSpeed = 1;
-    // int hieght;
+    float collided;
     ArrayList<Wall> walls = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -23,7 +20,7 @@ public class App extends PApplet {
     public void setup() {
         ballX = 775;
         ballY = 100;
-      
+
         // wall1 = new Wall(30, 50, 50, 5, this);
         // wall2 = new Wall(20, 10, 60, 5, this);
         // walls.add(wall1);
@@ -31,16 +28,15 @@ public class App extends PApplet {
 
         // width = 5;
         // if(width < hieght){
-        //     width = 5;
+        // width = 5;
         // }
         // else if (width > hieght){
-        //     width = hieght;
+        // width = hieght;
         // }
 
         loadFile();
-        
-       
-        }
+
+    }
 
     public void settings() {
         size(800, 600);
@@ -55,38 +51,34 @@ public class App extends PApplet {
         float wallWidth = abs(x1 - x2);
         float wallHeight = abs(y1 - y2);
 
-        if(wallWidth < wallHeight){
+        if (wallWidth < wallHeight) {
             wallWidth = 20;
         }
 
-        if(wallHeight < wallWidth){
+        if (wallHeight < wallWidth) {
             wallHeight = 20;
         }
         rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
         fill(255, 0, 0);
-            ellipse(ballX, ballY, ballSize, ballSize);
-        
-            ballX;
-            ballY;
-
+        ellipse(ballX, ballY, ballSize, ballSize);
     }
 
     public void keyPressed() {
         if (key == 's') {
             saveFile();
         }
-        if (keyCode == UP ){
- ballY -= 15;
+        if (keyCode == UP) {
+            ballY -= 15;
         }
-        if (keyCode == DOWN){
-ballY += 15;
+        if (keyCode == DOWN) {
+            ballY += 15;
         }
-        if (keyCode == RIGHT){
-ballX += 15;
+        if (keyCode == RIGHT) {
+            ballX += 15;
         }
-        if (keyCode == LEFT){
-ballX -= 15;
+        if (keyCode == LEFT) {
+            ballX -= 15;
         }
 
         // setup();
@@ -118,7 +110,7 @@ ballX -= 15;
     public void loadFile() {
         String filePath = "saveWall.txt"; // Path to the text file
 
-        try (Scanner scanner = new Scanner(Paths.get(filePath))){
+        try (Scanner scanner = new Scanner(Paths.get(filePath))) {
             while (scanner.hasNextLine()) {
                 String row = scanner.nextLine();
                 Wall temp = new Wall(row, this);
@@ -157,11 +149,11 @@ ballX -= 15;
         float wallWidth = abs(x1 - x2);
         float wallHeight = abs(y1 - y2);
 
-        if(wallWidth < wallHeight){
+        if (wallWidth < wallHeight) {
             wallWidth = 20;
         }
 
-        if(wallHeight < wallWidth){
+        if (wallHeight < wallWidth) {
             wallHeight = 20;
         }
         Wall w = new Wall(min(x1, x2), min(y1, y2), wallWidth, wallHeight, this);
