@@ -66,6 +66,9 @@ public class App extends PApplet {
 
         fill(255, 0, 0);
             ellipse(ballX, ballY, ballSize, ballSize);
+        
+            ballX;
+            ballY;
 
     }
 
@@ -73,7 +76,18 @@ public class App extends PApplet {
         if (key == 's') {
             saveFile();
         }
-        
+        if (keyCode == UP ){
+ ballY -= 15;
+        }
+        if (keyCode == DOWN){
+ballY += 15;
+        }
+        if (keyCode == RIGHT){
+ballX += 15;
+        }
+        if (keyCode == LEFT){
+ballX -= 15;
+        }
 
         // setup();
         // String input = reader.nextLine();
