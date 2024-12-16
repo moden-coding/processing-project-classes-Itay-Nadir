@@ -9,6 +9,10 @@ public class App extends PApplet {
     float x1, y1, x2, y2;
     boolean clicked;
     float ballX, ballY;
+    int exitX = 205;
+    int exitY = 497;
+    int exitWidth = 75;
+    int exitHeight = 60;
     int ballSize = 20;
     float collided;
     ArrayList<Wall> walls = new ArrayList<>();
@@ -60,8 +64,15 @@ public class App extends PApplet {
         }
         rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
-        fill(255, 0, 0);
+        fill(0, 255, 0);
         ellipse(ballX, ballY, ballSize, ballSize);
+
+        fill(255,0,0);
+        rect(exitX,exitY,exitWidth,exitHeight);
+
+        fill(0,0,0);
+        textSize(40);
+        text("Exit", 210,540);
     }
 
     public void keyPressed() {
