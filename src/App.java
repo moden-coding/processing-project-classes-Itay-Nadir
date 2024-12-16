@@ -25,19 +25,6 @@ public class App extends PApplet {
         ballX = 775;
         ballY = 100;
 
-        // wall1 = new Wall(30, 50, 50, 5, this);
-        // wall2 = new Wall(20, 10, 60, 5, this);
-        // walls.add(wall1);
-        // walls.add(wall2);
-
-        // width = 5;
-        // if(width < hieght){
-        // width = 5;
-        // }
-        // else if (width > hieght){
-        // width = hieght;
-        // }
-
         loadFile();
 
     }
@@ -67,12 +54,17 @@ public class App extends PApplet {
         fill(0, 255, 0);
         ellipse(ballX, ballY, ballSize, ballSize);
 
-        fill(255,0,0);
-        rect(exitX,exitY,exitWidth,exitHeight);
+        fill(255, 0, 0);
+        rect(exitX, exitY, exitWidth, exitHeight);
 
-        fill(0,0,0);
+        fill(0, 0, 0);
         textSize(40);
-        text("Exit", 210,540);
+        text("Exit", 210, 540);
+
+        if (Wall.checkTouch(PlayerBall.p) == true) {
+            // screen = 1;
+            // and create the end screen!
+        }
     }
 
     public void keyPressed() {
@@ -91,15 +83,6 @@ public class App extends PApplet {
         if (keyCode == LEFT) {
             ballX -= 15;
         }
-
-        // setup();
-        // String input = reader.nextLine();
-        // String[] parts = input.split(",");
-        // Wall wall = new Wall(x, y, Integer.valueOf(parts[0]),
-        // Integer.valueOf(parts[1]), this);
-        // // Wall wall = new Wall( 100, 5, this);
-        // walls.add(wall);
-
     }
 
     public void saveFile() {
@@ -138,15 +121,6 @@ public class App extends PApplet {
         clicked = true;
         x1 = mouseX;
         y1 = mouseY;
-        // if (key == ' '){
-        // setup();
-        // System.out.println("get input");
-        // String input = reader.nextLine();
-        // String[] parts = input.split(",");
-        // Wall wall = new Wall(x, y, Integer.valueOf(parts[0]),
-        // Integer.valueOf(parts[1]), this);
-        // // Wall wall = new Wall( 100, 5, this);
-        // walls.add(wall);
     }
 
     public void mouseDragged() {

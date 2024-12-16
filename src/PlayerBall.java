@@ -13,7 +13,7 @@ public class PlayerBall {
     public PlayerBall(int ballX, int ballY, PApplet c, int ballPosition){
         this.x = ballX;
         this.y = ballY;
-        this.size = 50;
+        this.size = 20;
         canvas = c;
         this.color = canvas.color(255,255,0);
     }
