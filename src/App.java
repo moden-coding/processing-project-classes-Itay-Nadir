@@ -15,6 +15,8 @@ public class App extends PApplet {
     int exitHeight = 60;
     int ballSize = 20;
     float collided;
+    boolean gameScreen = true;
+    boolean endScreen = false;
     ArrayList<Wall> walls = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -34,6 +36,19 @@ public class App extends PApplet {
     }
 
     public void draw() {
+        if(gameScreen){
+            if (ballY > height) {
+                ballY = height;
+                endScreen = true;
+            }
+
+            if (ballY < 0) {
+                endScreen = true; 
+            
+        }
+        if(){
+            //make something that if ball touches exit box then end screen is true.
+        }
         background(100);
 
         for (Wall w : walls) {
@@ -61,10 +76,11 @@ public class App extends PApplet {
         textSize(40);
         text("Exit", 210, 540);
 
-        if (Wall.checkTouch(PlayerBall.p) == true) {
+        if (Wall.checkTouch() == true) {
             // screen = 1;
             // and create the end screen!
         }
+    }
     }
 
     public void keyPressed() {
@@ -116,6 +132,7 @@ public class App extends PApplet {
 
         }
     }
+    
 
     public void mousePressed() {
         clicked = true;
