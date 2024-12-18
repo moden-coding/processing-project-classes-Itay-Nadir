@@ -35,7 +35,7 @@ public class Wall {
     }
 
     public boolean checkTouch(PlayerBall p) {
-        float distanceFromWall = canvas.dist(p.getX(), this.x, p.getY(), this.y);
+        float distanceFromWall = canvas.dist(p.getX(), p.getY(), this.x, this.y);//ask gpt how to do this for circle and square
         if (distanceFromWall < size / 2) {
             return true;
         } else {
@@ -43,6 +43,6 @@ public class Wall {
         }
     }
     public String saveInfo(){
-        return "" + x + "," + y + "," + width + ","+ height; 
+        return "" + x + "," + y + "," + width + "," + height; 
     }
 }
