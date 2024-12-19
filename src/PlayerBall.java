@@ -9,7 +9,7 @@ public class PlayerBall {
     private int speed;
     private int color;
 
-    public PlayerBall(int ballX, int ballY, PApplet c, int ballPosition){
+    public PlayerBall(int ballX, int ballY, PApplet c){
         this.x = ballX;
         this.y = ballY;
         this.size = 20;
@@ -22,7 +22,14 @@ public class PlayerBall {
         return pos;
     }
     public boolean checkTouchOfExit(int exitX, int exitY, int exitWidth, int exitHeight){
+        float closestX = canvas.constrain(x, exitX, exitX + exitWidth);
+        float closestY = canvas.constrain(y, exitY, exitY + exitHeight);
 
+        if(canvas.dist(x,y, closestX, closestY) <20/2){
+            return true;
+        }else{
+            return false;
+        }
     }
     public void display(){
         canvas.fill(color);
@@ -53,6 +60,10 @@ public class PlayerBall {
         }else{
             return false;
         }
+    }
+
+    public float getRadius(){
+        return size;
     }
     }
 
