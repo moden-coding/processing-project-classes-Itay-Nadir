@@ -55,7 +55,7 @@ public class PlayerBall {
         return y;
     }
     public boolean hitsEdge(){
-        if(y < 0 || y > canvas.height){
+        if(x < 0 || x > canvas.width || y < 0 || y > canvas.height){
             return true;    
         }else{
             return false;

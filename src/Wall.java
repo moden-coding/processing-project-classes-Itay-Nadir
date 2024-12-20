@@ -5,7 +5,6 @@ public class Wall {
     private float y;
     private float width;
     private float height;
-    private int size;
     private PApplet canvas;
     private int color;
 

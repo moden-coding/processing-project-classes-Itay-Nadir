@@ -38,7 +38,7 @@ public class App extends PApplet {
         if (scene == 1) {
             fill(0);
             textSize(24);
-            text("Maze Editor and Press Enter to Start Game", 20, 30);
+            text("Maze Editor and Press Enter to Start Game", 370, 25);
 
             float wallWidth = abs(x1 - x2);
             float wallHeight = abs(y1 - y2);
@@ -54,7 +54,6 @@ public class App extends PApplet {
 
             for (Wall w : walls) {
                 w.display();
-
             }
         } else if (scene == 2) {
 
@@ -200,7 +199,7 @@ public class App extends PApplet {
         walls.add(w);
     }
 
-        public void resetGame() {
+    public void resetGame() {
     gameOver = false;
     gameWon = false;
     ball = new PlayerBall(775, 100, this);
