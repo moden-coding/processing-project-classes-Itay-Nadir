@@ -14,7 +14,7 @@ public class PlayerBall {
         this.y = ballY;
         this.size = 20;
         canvas = c;
-        this.speed = 15;
+        this.speed = 5;
         this.color = canvas.color(255,255,0);
     }
     public int[] getPosition(){

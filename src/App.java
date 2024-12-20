@@ -13,8 +13,9 @@ public class App extends PApplet {
     int exitWidth = 75;
     int exitHeight = 60;
     float collided;
-    boolean gameScreen = true;
-    boolean endScreen = false;
+    int scene = 1;
+    boolean gameOver = false;
+    boolean gameWon = false;
     ArrayList<Wall> walls = new ArrayList<>();
     PlayerBall ball;
 
@@ -23,9 +24,7 @@ public class App extends PApplet {
     }
 
     public void setup() {
-        // ballX = 775;
-        // ballY = 100;
-        ball = new PlayerBall (775, 100, this);
+        ball = new PlayerBall(775, 100, this);
         loadFile();
 
     }
@@ -35,97 +34,95 @@ public class App extends PApplet {
     }
 
     public void draw() {
+        background(100);
+        if (scene == 1) {
+            fill(0);
+            textSize(24);
+            text("Maze Editor and Press Enter to Start Game", 20, 30);
 
-        // if (scene == 1) {
+            float wallWidth = abs(x1 - x2);
+            float wallHeight = abs(y1 - y2);
 
-        // } else if (scene == 2) {
+            if (wallWidth < wallHeight) {
+                wallWidth = 20;
+            }
 
-        // }
+            if (wallHeight < wallWidth) {
+                wallHeight = 20;
+            }
+            rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
 
-        for(Wall w:walls){
-            w.display();
-        }
-        if (gameScreen) {
+            for (Wall w : walls) {
+                w.display();
+
+            }
+        } else if (scene == 2) {
+
+            ball.display();
+
             if (ball.hitsEdge()) {
                 fill(255, 0, 0);
                 textSize(64);
-                text("You Won", width / 2 - 150, height / 2);
+                text("Game Over", width / 2 - 150, height / 2);
+                gameOver = true;
             }
-        }
-
-        if (ball.checkTouchOfExit(exitX, exitY, exitWidth, exitHeight)) {
-            fill(255, 0, 0);
-            textSize(64);
-            text("You Won", width / 2 - 150, height / 2);
-        }
-        background(100);
-
-        ball.display();
-        for (Wall w : walls) {
-            w.display();
-            if (w.checkTouch(ball)) {
-               
+            for (Wall w : walls) {
+                w.display();
+                if (w.checkTouch(ball)) {
+                    fill(255, 0, 0);
+                    textSize(64);
+                    text("Game Over", width / 2 - 150, height / 2);
+                    gameOver = true;
+                }
+                if (ball.checkTouchOfExit(exitX, exitY, exitWidth, exitHeight)) {
+                    fill(255, 0, 0);
+                    textSize(64);
+                    text("You Won", width / 2 - 150, height / 2);
+                    gameWon = true;
+                }
             }
+            fill(0, 0, 0);
+            textSize(40);
+            text("Exit", 210, 540);
         }
-        float wallWidth = abs(x1 - x2);
-        float wallHeight = abs(y1 - y2);
-
-        if (wallWidth < wallHeight) {
-            wallWidth = 20;
-        }
-
-        if (wallHeight < wallWidth) {
-            wallHeight = 20;
-        }
-        rect(min(x1, x2), min(y1, y2), wallWidth, wallHeight);
-
-        ball.display();
-
-        fill(255, 0, 0);
-        if (ball.checkTouchOfExit(exitX, exitY, exitWidth, exitHeight)) {
-            fill(255, 0, 0);
-            textSize(64);
-            text("You Won", width / 2 - 150, height / 2);
-        }
-
-        fill(0, 0, 0);
-        textSize(40);
-        text("Exit", 210, 540);
-
-        // if (Wall.checkTouch() == true) {
-        // // screen = 1;
-        // // and create the end screen!
-        // }
     }
 
     public void keyPressed() {
+        if(key == ENTER){
+            if (scene == 1) {
+                scene = 2; 
+            } else if (scene == 2) {
+                scene = 1; 
+                resetGame();
+        }
         if (key == 's') {
             saveFile();
         }
+        if (scene == 2){
         if (keyCode == UP) {
             ball.moveUp();
             for (Wall w : walls) {
-               
+
                 if (w.checkTouch(ball)) {
-                   ball.moveDown();
+                    ball.moveDown();
                 }
             }
         }
         if (keyCode == DOWN) {
             ball.moveDown();
             for (Wall w : walls) {
-               
+
                 if (w.checkTouch(ball)) {
-                   ball.moveUp();
+                    ball.moveUp();
                 }
             }
         }
         if (keyCode == RIGHT) {
             ball.moveRight();
             for (Wall w : walls) {
-               
+
                 if (w.checkTouch(ball)) {
-                   ball.moveLeft();
+                    ball.moveLeft();
                 }
             }
         }
@@ -133,11 +130,13 @@ public class App extends PApplet {
         if (keyCode == LEFT) {
             ball.moveLeft();
             for (Wall w : walls) {
-               
+
                 if (w.checkTouch(ball)) {
-                   ball.moveRight();
+                    ball.moveRight();
                 }
             }
+        }
+}
         }
     }
 
@@ -199,6 +198,11 @@ public class App extends PApplet {
         }
         Wall w = new Wall(min(x1, x2), min(y1, y2), wallWidth, wallHeight, this);
         walls.add(w);
-
     }
-}
+
+        public void resetGame() {
+    gameOver = false;
+    gameWon = false;
+    ball = new PlayerBall(775, 100, this);
+        }
+    }

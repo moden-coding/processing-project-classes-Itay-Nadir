@@ -30,7 +30,7 @@ public class Wall {
 
     public void display() {
         canvas.fill(color);
-        canvas.rect(this.x, this.y, this.width, this.height, this.size);
+        canvas.rect(this.x, this.y, this.width, this.height);
         
     }
 
