@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 public class PlayerBall {
-
+    // Variables for ball:
     private int x;
     private int y;
     private int size;
@@ -9,61 +9,83 @@ public class PlayerBall {
     private int speed;
     private int color;
 
-    public PlayerBall(int ballX, int ballY, PApplet c){
+    // Constructor for class which sets default or initial values for the variables:
+    public PlayerBall(int ballX, int ballY, PApplet c) {
         this.x = ballX;
         this.y = ballY;
         this.size = 20;
         canvas = c;
         this.speed = 5;
-        this.color = canvas.color(255,255,0);
+        this.color = canvas.color(255, 255, 0);
     }
-    public int[] getPosition(){
-        int[]pos = {this.x,this.y}; 
+
+    // Returns the position of the ball:
+    public int[] getPosition() {
+        int[] pos = { this.x, this.y };
         return pos;
     }
-    public boolean checkTouchOfExit(int exitX, int exitY, int exitWidth, int exitHeight){
+
+    // Check if the ball touches the exit (use of Chat Gpt here to help edit the
+    // method):
+    public boolean checkTouchOfExit(int exitX, int exitY, int exitWidth, int exitHeight) {
+        // Finds the closest points of the exit to the ball:
         float closestX = canvas.constrain(x, exitX, exitX + exitWidth);
         float closestY = canvas.constrain(y, exitY, exitY + exitHeight);
-
-        if(canvas.dist(x,y, closestX, closestY) <20/2){
+        // Checks if the ball is in the exit box:
+        if (canvas.dist(x, y, closestX, closestY) < 20 / 2) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public void display(){
+
+    // Displays the ball on the canvas:
+    public void display() {
         canvas.fill(color);
         canvas.circle(this.x, this.y, this.size);
     }
 
-    public void moveUp(){
+    // Moves the ball up based on it's speed:
+    public void moveUp() {
         y -= speed;
     }
-    public void moveDown(){
+
+    // Moves the ball down based on it's speed:
+    public void moveDown() {
         y += speed;
     }
-    public void moveRight(){
+
+    // Moves the ball right based on it's speed:
+    public void moveRight() {
         x += speed;
     }
-    public void moveLeft(){
+
+    // Moves the ball left based on it's speed:
+    public void moveLeft() {
         x -= speed;
     }
-    public int getX(){
+
+    // Returns the ball's X position:
+    public int getX() {
         return x;
     }
-    public int getY(){
+
+    // Returns the ball's Y position:
+    public int getY() {
         return y;
     }
-    public boolean hitsEdge(){
-        if(x < 0 || x > canvas.width || y < 0 || y > canvas.height){
-            return true;    
-        }else{
+
+    // Checks if the ball hits the edge of the screen:
+    public boolean hitsEdge() {
+        if (x < 0 || x > canvas.width || y < 0 || y > canvas.height) {
+            return true;
+        } else {
             return false;
         }
     }
 
-    public float getRadius(){
+    // Returns the radius of the ball:
+    public float getRadius() {
         return size;
     }
-    }
-
+}
